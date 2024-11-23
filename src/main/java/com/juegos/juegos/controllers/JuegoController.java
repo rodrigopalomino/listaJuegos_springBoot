@@ -1,6 +1,6 @@
 package com.juegos.juegos.controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,12 @@ public class JuegoController {
   @Autowired
   private JuegoService juegoService;
 
-  @GetMapping
-  public ArrayList<Juego> getJuegos() {
-    return juegoService.getJuegos();
+  @GetMapping("")
+  public List<Juego> getJuegos(@RequestParam(value = "nombre", required = false) String nombre) {
+      if (nombre != null && !nombre.isEmpty()) {
+          return juegoService.getJuegosByNombre(nombre);
+      }
+      return juegoService.getJuegos();
   }
 
   @GetMapping("/{id}")

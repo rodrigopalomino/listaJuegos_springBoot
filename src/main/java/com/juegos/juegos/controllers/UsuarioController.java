@@ -64,4 +64,17 @@ public class UsuarioController {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
+
+  @PostMapping("/login")
+  public ResponseEntity<?> login(@RequestBody Usuario loginRequest) {
+      // Accede a los datos de username y password desde loginRequest
+      Usuario usuario = usuarioService.login(loginRequest.getUsername(), loginRequest.getPassword());
+  
+      if (usuario != null) {
+          return ResponseEntity.ok(usuario);  // Credenciales correctas
+      } else {
+          return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                               .body("Invalid username or password");  // Usuario o contraseña incorrectos
+      }
+  }
 }

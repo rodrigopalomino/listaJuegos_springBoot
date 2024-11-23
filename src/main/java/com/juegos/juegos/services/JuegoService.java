@@ -27,6 +27,10 @@ public class JuegoService {
     return (ArrayList<Juego>) iJuego.findAll();
   }
 
+  public ArrayList<Juego> getJuegosByNombre(String nombre) {
+    return (ArrayList<Juego>) iJuego.findByNombreContainingIgnoreCase(nombre);
+  }
+
   public Juego createJuego(Juego juego) {
     return iJuego.save(juego);
   }

@@ -48,4 +48,16 @@ public class UsuarioService {
       return false;
     }
   }
+
+  public Usuario login(String username, String password) {
+    ArrayList<Usuario> usuarios = (ArrayList<Usuario>) iUsuario.findAll();
+    
+    for (Usuario usuario : usuarios) {
+      if (usuario.getUsername().equals(username) && usuario.getPassword().equals(password)) {
+        return usuario;
+      }
+    }
+    
+    return null;
+  }
 }
